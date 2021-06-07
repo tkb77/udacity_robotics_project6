@@ -3,7 +3,9 @@
 xterm  -e  " source /opt/ros/kinetic/setup.bash; roscore" & 
 sleep 5
 
-xterm -e "roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=/home/workspace/catkin_ws/src/map/yutaWorld.world" &
+SCRIPT_DIR="$(rospack find add_markers)"
+
+xterm -e "roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=$SCRIPT_DIR/../map/yutaWorld.world" &
 
 xterm -e "roslaunch turtlebot_gazebo gmapping_demo.launch initial_pose_a:=-1.5708" &
 

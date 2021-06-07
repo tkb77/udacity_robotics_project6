@@ -3,17 +3,19 @@
 xterm -e "source /opt/ros/kinetic/setup.bash; roscore" &
 sleep 5
 
-xterm -e "roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=/home/workspace/catkin_ws/src/map/yutaWorld.world" &
+SCRIPT_DIR="$(rospack find add_markers)"
 
-xterm -e "roslaunch turtlebot_gazebo amcl_demo.launch map_file:=/home/workspace/catkin_ws/src/map/map.yaml  initial_pose_a:=-1.5708" &
+xterm -e "roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=$SCRIPT_DIR/../map/yutaWorld.world" &
+
+xterm -e "roslaunch turtlebot_gazebo amcl_demo.launch map_file:=$SCRIPT_DIR/../map/map.yaml  initial_pose_a:=-1.5708" &
 
 sleep 10
 
 xterm -e "roslaunch turtlebot_rviz_launchers view_navigation.launch" &
 sleep 10
 
-xterm -e "source /home/workspace/catkin_ws/devel/setup.bash; rosrun add_markers add_markers_node" &
+xterm -e "rosrun add_markers add_markers_node" &
 sleep 5
 
-xterm -e "source /home/workspace/catkin_ws/devel/setup.bash; rosrun pick_objects pick_objects_node"
+xterm -e "rosrun pick_objects pick_objects_node"
 
